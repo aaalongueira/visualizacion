@@ -1,0 +1,35 @@
+
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700);
+
+
+.label {
+    font-family: sans-serif;
+    fill: #777;
+    font-size: 10px;
+}
+
+
+body {
+  font-family: "Helvetica";
+  margin: 40px ;
+}
+
+h1 {
+  font-size: 85px;
+  margin-top: .3em;
+  margin-bottom: 0;
+}
+
+h1 + h2 {
+  margin-top: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 40px;
+}
+
+h1, h2 {
+  font-family: "Yanone Kaffeesatz";
+  text-rendering: optimizeLegibility;
+}
