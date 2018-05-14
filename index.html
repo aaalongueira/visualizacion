@@ -13,6 +13,10 @@
 	
 
 	<style>
+		.content {
+		    max-width: 1000px;
+		    margin: auto;
+		}
         #monthly-volume-chart g.y {
             display: none;
         }
@@ -41,16 +45,9 @@
         	text-align: center;
         	justify-content: center;
         	align-items: center;
-        } 
+        }
     </style>
 
-
-    <style>
-	.content {
-	    max-width: 1000px;
-	    margin: auto;
-	}
-	</style>
 
 </head>
 <!-- ################################# FIN DE LA CABECERA ################################# -->
@@ -84,10 +81,8 @@
 		
 		<h2> Metodología </h2>
 		<p align = "justify">
-			Para realizar todas las visualizaciones se usó la librería <a href="https://dc-js.github.io/dc.js/">dc.js</a> de javascript, cuyo funcionamiento se basa en <a href="http://crossfilter.github.io/crossfilter/">Crossfilter</a> para permitir una exploración altamente eficiente en capas de datos multidimensionales, y en <a href="https://d3js.org/">D3</a> para renderizar losgráficos en formatos SVG. Todos los gráficos creados usando dc.js están impulsadas por datos y son reactivas, por lo que proporcionan realimentación instantánea a la interacción de usuario. por todo ello, dc.js es una librería muy potente de javacript para la visualizacion y análisis de datos en navegadores o dispositivos móviles.
-		</p>
-		
-
+			Para realizar todas las visualizaciones se usó la librería <a href="https://dc-js.github.io/dc.js/">dc.js</a> de javascript, cuyo funcionamiento se basa en <a href="http://crossfilter.github.io/crossfilter/">Crossfilter</a> para permitir una exploración altamente eficiente en capas de datos multidimensionales, y en <a href="https://d3js.org/">D3</a> para renderizar los gráficos en formatos SVG. Todos los gráficos creados usando dc.js están impulsadas por datos y son reactivas, por lo que proporcionan realimentación instantánea a la interacción de usuario. por todo ello, dc.js es una librería muy potente de javacript para la visualizacion y análisis de datos en navegadores o dispositivos móviles.
+		</p>	
 
 		
 		<h2> Gráficas Principales </h2>
@@ -100,6 +95,7 @@
 				</li>
 			</ul>
 		</p>
+
 
 		<div class="row">
 		<!-- Creamos los contenedores para los gráficos -->
@@ -126,8 +122,6 @@
 		        <div class="clearfix"></div>
 		    </div>
 		</div>
-
-
 
 
 		<div class="row">
@@ -185,14 +179,27 @@
 		</div>
 
 
-
-
-		<div class="clearfix"></div>
+		<div class = "clearfix"></div>
 
 		<a href="https://github.com/aaalongueira/visualizacion"><img style="position: absolute; top: 0; right: 0; border: 0;"
                                                   src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
                                                   alt="Fork me on GitHub"></a>
+		<p align = "justify">
+			<h2>
+				Notas
+			</h2>
+			<ul>
+				<li type = "square"> No hay datos disponibles para el año 2013. Inicialmente, se optó por una interpolación lineal para cubrir esos datos, pero no es una solución adecuada. </li>
+				<li type = "square"> Los colores de las Gráficas de Selección está relacionado con el número de datos. </li>
+			</ul>
+		</p>
 	</div>
+
+    <footer align = "center">
+    	<small>
+    		<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">&copy; Copyright 2018 </a>- Ángel Alfonso Antonio Longueira Romero
+    	</small>
+    </footer>
 <!-- ################################### FIN DE LA PÁGINA WEB ################################## -->
 
 
