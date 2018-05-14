@@ -19,7 +19,29 @@
         #logo {
             margin-right: 2em;
             margin-top: 2em;
+
         }
+        #stationName {
+        	margin: 1rem;
+        	padding: 1rem;
+        	text-align: center;
+        	justify-content: center;
+        	align-items: center;
+        }
+        #day-of-week-chart {
+        	margin: 1rem;
+        	padding: 1rem;
+        	text-align: center;
+        	justify-content: center;
+        	align-items: center;
+        }    
+        #hours-chart {
+        	margin: 1rem;
+        	padding: 1rem;
+        	text-align: center;
+        	justify-content: center;
+        	align-items: center;
+        } 
     </style>
 
 
@@ -42,60 +64,132 @@
 <body>
 	<div class = "content">
 		<!-- Insertamos el logo de la ciudad de Gijón -->
-		<img id="logo" src="xixon3.logo.png" style="float:left" width=125 height=125></img>
+		<img id="logo" src="https://raw.githubusercontent.com/aaalongueira/visualizacion/master/xixon3.logo.png" style="float:left" width=125 height=125></img>
 		<!-- Añadimos el título de la página -->
-		<h2>Visualización de datos - Calidad del Aire de Gijon</h2>
+		<h2>Visualización de Datos - Calidad del Aire de Gijon</h2>
 		<!-- Insertamos un párrafo para describir lo que vamos a hacer -->
-		<p>
-		    <b>dc.js</b> is a javascript charting library with
-		    native <a href="http://crossfilter.github.io/crossfilter/">crossfilter</a> support, allowing
-		    highly efficient exploration on large multi-dimensional datasets (inspired by crossfilter's
-		    demo). It leverages <a href="http://d3js.org/">d3</a> to render charts in CSS-friendly SVG
-		    format. Charts rendered using dc.js are data driven and reactive and therefore provide instant
-		    feedback to user interaction.
+		<h2> Introducción </h2>
+		<p align = "justify">
+			La ciudad de <b>Gijón</b> presentó en varias ocasiones el <b>nivel más alto de contaminación</b> por partículas de Europa durante el año 2017.
+			En esos momentos, presentaba el doble de partículas en suspensión que Madrid, cuando la capital estaba con alertas con tráfico reducido.
 		</p>
+		<p align = "justify">
+			La mayor parte de estos problemas se deben a la larga tradición industrial asturiana y a la fuerte dependencia económica que tiene sobre el sector. Además,
+			durante ese mismo año, se produjeron varios casos de <b>escapes accidentales</b> <a href="http://www.elcomercio.es/aviles/nube-negra-aviles-20180117180800-nt.html">[1]</a>,
+			<a href="http://www.lne.es/aviles/2017/04/26/estacion-medioambiental-llaranes-registro-ayer/2094793.html">[2]</a>,
+			<a href="http://www.elcomercio.es/gijon/averia-instalaciones-arcelor-20171122000608-ntvo.html">[3]</a>,
+			<a href="http://www.lne.es/gijon/2018/04/19/principado-alerta-riesgo-alta-contaminacion/2272387.html">[4]</a>.
+			Por ello, usando los <a href="https://transparencia.gijon.es/search/risp_dataset/page/1808-catalogo-de-datos?utf8=%E2%9C%93&search=calidad+del+aire&search_sector=246&search_format=&commit=Buscar&authenticity_token=DDySUww1zkts9eC88yzk6t%2Bos%2BWdV87ADQgZxinnEJ0%3D">Datos Abiertos</a> del Ayuntamiento de Gijón, se pretende crear una visualización sencilla que lea los datos desde un archivo CSV.
+		</p>
+		
+		<h2> Metodología </h2>
+		<p align = "justify">
+			Para realizar todas las visualizaciones se usó la librería <a href="https://dc-js.github.io/dc.js/">dc.js</a> de javascript, cuyo funcionamiento se basa en <a href="http://crossfilter.github.io/crossfilter/">Crossfilter</a> para permitir una exploración altamente eficiente en capas de datos multidimensionales, y en <a href="https://d3js.org/">D3</a> para renderizar losgráficos en formatos SVG. Todos los gráficos creados usando dc.js están impulsadas por datos y son reactivas, por lo que proporcionan realimentación instantánea a la interacción de usuario. por todo ello, dc.js es una librería muy potente de javacript para la visualizacion y análisis de datos en navegadores o dispositivos móviles.
+		</p>
+		
 
 
+		
+		<h2> Gráficas Principales </h2>
+		<p align = "justify">
+			Esta visualización consta de dos elementos principales:
+			<ul>
+				<li type="square"><b><u>Gráficas de Selección</u>: </b>su función principal es poder filtrar los datos. Son las gráficas de <b><i>Datos por Estación</i></b>, <b><i>Datos por Día de la Semana</i></b>, <b><i>Datos por Horas del Día</i></b>.
+				</li>
+				<li type="square"><b><u>Gráficas de Datos</u>: </b>en ellas se muestran los datos una vez filtrados. Son las gráficas de <b><i>Concentración de Contaminantes</i></b>, <b><i>Temperatura</i></b>, <b><i>Humedad Relativa</i></b>.
+				</li>
+			</ul>
+		</p>
 
 		<div class="row">
 		<!-- Creamos los contenedores para los gráficos -->
 			<div id="stationName">
 				<!-- Título del gráfico -->
-				<strong>Datos por cada Estación</strong>
+				<strong>Datos por Estación</strong>
 				<!-- Creamos un botón de RESET que aparezca sólo cuando se hayan aplicado filtros -->
 		        <a class="reset" href="javascript:stationNameChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 	        	<div class="clearfix"></div>
 			</div>
 
 			<div id="day-of-week-chart">
-				<strong>Día de la semana</strong>
+				<strong>Datos por Días de la Semana</strong>
 				<a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 
 	        	<div class="clearfix"></div>
 			</div>
+
+			<div id="hours-chart">
+		        <strong>Datos por Horas del Día</strong>
+		        <!-- <span class="reset" style="display: none;">range: <span class="filter"></span></span> -->
+		        <a class="reset" href="javascript:hoursChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+
+		        <div class="clearfix"></div>
+		    </div>
 		</div>
+
 
 
 
 		<div class="row">
-			<div id="monthly-move-chart">
-				<strong>Mes</strong>
+			<div id="monthly-contaminantes-chart">
+				<strong> Concentración de Contaminantes (&mu;g / m<sup>3</sup>) </strong>
 
 				<span class="reset" style="display: none;">range: <span class="filter"></span></span>
-		        <a class="reset" href="javascript:moveChart.filterAll();volumeChart.filterAll();dc.redrawAll();"
+		        <a class="reset" href="javascript:contaminantesChart.filterAll();contaminantesVolumeChart.filterAll();dc.redrawAll();"
 		           style="display: none;">reset</a>
 	        	<div class="clearfix"></div>
 
 			</div>
+		</div>
 
-			<div id="monthly-volume-chart">
+		<div class="row">
+			<div id="contaminantes-volume-chart">
 			</div>
 			<p class="muted pull-right" style="margin-right: 15px;">selecciona un rango para hacer zoom</p>
 		</div>
 
+		<div class="row">
+			<div id="monthly-TMP-chart">
+				<strong> Temperatura (ºC) </strong>
+
+				<span class="reset" style="display: none;">range: <span class="filter"></span></span>
+		        <a class="reset" href="javascript:TMPChart.filterAll();TMPVolumeChart.filterAll();dc.redrawAll();"
+		           style="display: none;">reset</a>
+	        	<div class="clearfix"></div>
+
+			</div>			
+		</div>
+
+		<div class="row">
+			<div id="TMP-volume-chart">
+			</div>
+			<p class="muted pull-right" style="margin-right: 15px;">selecciona un rango para hacer zoom</p>
+		</div>
+
+		<div class="row">
+			<div id="monthly-HR-chart">
+				<strong> Humedad Relativa (%) </strong>
+
+				<span class="reset" style="display: none;">range: <span class="filter"></span></span>
+		        <a class="reset" href="javascript:HRChart.filterAll();HRVolumeChart.filterAll();dc.redrawAll();"
+		           style="display: none;">reset</a>
+	        	<div class="clearfix"></div>
+
+			</div>			
+		</div>
+
+		<div class="row">
+			<div id="HR-volume-chart">
+			</div>
+			<p class="muted pull-right" style="margin-right: 15px;">selecciona un rango para hacer zoom</p>
+		</div>
+
+
+
+
 		<div class="clearfix"></div>
-		
-		<a href="https://github.com/dc-js/dc.js"><img style="position: absolute; top: 0; right: 0; border: 0;"
+
+		<a href="https://github.com/aaalongueira/visualizacion"><img style="position: absolute; top: 0; right: 0; border: 0;"
                                                   src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
                                                   alt="Fork me on GitHub"></a>
 	</div>
